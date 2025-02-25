@@ -1,4 +1,4 @@
-name: CI
+name: Windows - RustDesk
 
 on:
   workflow_dispatch:
@@ -7,13 +7,17 @@ jobs:
   build:
     name: Start Building...
     runs-on: windows-latest
+    timeout-minutes: 9999
+    
     steps:
       - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://gitlab.com/chamod12/win10-github-rdp-rustdesk/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
-      - name: Log In To AnyDesk
+
+      - name: Log In To RustDesk
         run: cmd /c show.bat
+
 
       - name: Wait for 6 hours
         run: powershell Start-Sleep -Seconds 21600
